@@ -39,12 +39,12 @@ const capitalizeFirstLetter = (str = undefined) => {
 
 /**
  * Checks if the provided parameter is of type Array
- * @param {Array} arr - value to check
+ * @param {*} arr - value to check
  * @returns {Boolean} - true if is array false if not array
  */
 const isArray = (arr) => {
   try {
-    if (arr !== null || arr === undefined) throw new Error("Parameter undefined");
+    if (arr === null || arr === undefined) throw new Error("Parameter undefined");
     if (typeof arr === 'object' && arr instanceof Array) {
       return true;
     }
@@ -55,13 +55,47 @@ const isArray = (arr) => {
 }
 
 /**
+ * Checks if the provided parameter is of type function
+ * @param {*} fn - value to check 
+ * @returns {Boolean} - true if value is function false if not a function
+ */
+const isFunction = (fn) => {
+  try {
+    if (fn === null || fn === undefined) throw new Error("Parameter undefined");
+    if ({}.toString.call(fn) === '[object Function]'){
+      return true;
+    }
+    return false;    
+  } catch (error) {
+    console.log(`${ERROR_DETAILS}[isFunction][ERROR]-${error.message}`);
+  }
+}
+
+/**
+ * Checks if the provided parameter is a number
+ * @param {*} num - value to check 
+ * @returns {Boolean} - true if value is num false if not a num
+ */
+const isNumber = (num) => {
+  try {
+    if (num === null || num === undefined) throw new Error("Parameter undefined");
+    if (!isNaN(num)){
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.log(`${ERROR_DETAILS}[isNumber][ERROR]-${error.message}`);
+  }
+}
+
+/**
  * Checks if the provided parameter is of type Object
- * @param {Object} obj 
+ * @param {*} obj - vallue to check
  * @returns {Boolean} true if value is object | false if value is not an object
  */
 const isObject = (obj) => {
   try {
-    if (obj !== null || obj === undefined) throw new Error("Parameter undefined");
+    if (obj === null || obj === undefined) throw new Error("Parameter undefined");
     if (typeof obj === 'object' && obj instanceof Object) {
       return true;
     }
@@ -73,12 +107,12 @@ const isObject = (obj) => {
 
 /**
  * Checks if the provided parameter is of type String
- * @param {String} str 
+ * @param {*} str - value to check
  * @returns {Boolean} - true if value is string false if not a string
  */
 const isString = (str) => {
   try {
-    if (arr !== null || arr === undefined) throw new Error("Parameter undefined");
+    if (str === null || str === undefined) throw new Error("Parameter undefined");
     if (typeof str === 'string' || str instanceof String) {
       return true;
     }
@@ -120,6 +154,8 @@ const utilities = {
   capitalizeEachFirstLetter,
   capitalizeFirstLetter,
   isArray,
+  isFunction,
+  isNumber,
   isObject,
   isString, 
   shuffleArray
