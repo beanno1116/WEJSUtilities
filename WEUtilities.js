@@ -25,8 +25,8 @@ const capitalizeEachFirstLetter = (str,del=" ") => {
  * @returns {String} - string with capitalized first letter
  */
 const capitalizeFirstLetter = (str = undefined) => {
-  try {
-    if (str !== null || str === undefined) throw new Error("Parameter undefined");
+  try {    
+    if (str === null || str === undefined) throw new Error("Parameter undefined");
     if (!isString(str)) throw new Error("Parameter is not of type string");  
     return str.charAt(0).toUpperCase() + str.slice(1);
   } catch (error) {
