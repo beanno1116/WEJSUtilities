@@ -34,6 +34,57 @@ const capitalizeFirstLetter = (str = undefined) => {
   }
 }
 
+/**
+ * Method that will check the darkmode setting on the window using 
+ * matchMedia on the window for prefer-color-scheme: dark and seeing if
+ * it is true
+ * @returns {Boolean} - true if browser has darkmode enabled false if not
+ */
+const isDarkMode = () => {
+  try {
+    var mediaQuery = window.matchMedia("(prefer-color-scheme: dark)");
+    var darkMode = mediaQuery.matches;
+    if (darkMode) {
+      return true;
+    }
+    return false;    
+  } catch (error) {
+    console.log(`${ERROR_DETAILS}[isDarkMode][ERROR]-${error.message}`);
+  }
+}
+
+
+/**
+ * gets the type of function passed
+ * @param {Function} fn - value to check
+ * @returns {String} - name of the function based on the constructor.name
+ */
+const functionType = (fn) => {
+  try {
+    if (fn === null || fn === undefined) throw new Error("Parameter undefined");
+    if (!isFunction) throw new Error("Parameter not of type Function");
+    var type = fn?.constructor?.name;
+    if (type){
+      return type;
+    }
+    return "";
+  } catch (error) {
+    console.log(`${ERROR_DETAILS}[functionType][ERROR]-${error.message}`);
+  }
+}
+
+const findOverFlowedElement = () => {
+  try {
+    document.querySelectorAll('*').forEach(el => {
+      if (el.offsetWidth > document.documentElement.offsetWidth){
+        console.log("Overflowing element: ".el);
+      }
+    })
+  } catch (error) {
+    console.log(`${ERROR_DETAILS}[findOverFlowedElement][ERROR]-${error.message}`);
+  }
+}
+
 
 
 
@@ -153,6 +204,9 @@ const shuffleArray = (arr) => {
 const utilities = {
   capitalizeEachFirstLetter,
   capitalizeFirstLetter,
+  findOverFlowedElement,
+  isDarkMode,
+  functionType,
   isArray,
   isFunction,
   isNumber,
