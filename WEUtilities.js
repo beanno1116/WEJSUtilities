@@ -199,6 +199,27 @@ const shuffleArray = (arr) => {
 
 
 
+/**
+ * Generator function that returns an Iterable type
+ * will yield each element of an iterable until the count is <= 0 then return;
+ * yields {value:done:}
+ * USE: let items = [...take(2,[1,2,3,4,5])]
+ * @param {int} count - number of items to return from an array(iterable)
+ * @param {Array} arr - Array to shuffle 
+ * @return {Array} - shuffled array 
+ */
+const take = function* (count,arr) {
+  try {
+    for (let item of arr){
+      if (count <= 0) return;
+      count--;
+      yield item;
+    }
+  } catch (error) {
+    console.log(`${ERROR_DETAILS}[take][ERROR]-${error.message}`);
+  }
+}
+
 
 
 const utilities = {
@@ -212,7 +233,8 @@ const utilities = {
   isNumber,
   isObject,
   isString, 
-  shuffleArray
+  shuffleArray,
+  take
 }
 
 export default utilities;
