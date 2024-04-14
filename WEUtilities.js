@@ -174,6 +174,35 @@ const isString = (str) => {
 }
 
 
+/**
+ * 
+ * @param {Array} promises - array of promises
+ * @param {int} count - number of resolved promises before resolve() 
+ * @returns {Promise} - promise that will resolve when count of promises resolved is reached
+ */
+const promiseSome = (promises,count) => {
+  try {
+    return new Promise((resolve,reject) => {
+      const resolved = [];
+      const rejected = [];
+      promises.forEach((promise,index) => {
+        promise.then((val) => {
+          resolved.push(val);
+          if (resolved.length === count) {
+            resolve(resolved);
+          }
+        }).catch((err)=> {
+          rejected.push(err);
+          if (reject.length > promises.length - count) {
+            reject(new AggregateError(rejected));
+          }
+        })
+      })
+    })
+  } catch (error) {
+    
+  }
+}
 
 
 /**
@@ -232,7 +261,8 @@ const utilities = {
   isFunction,
   isNumber,
   isObject,
-  isString, 
+  isString,
+  promiseSome,
   shuffleArray,
   take
 }
